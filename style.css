@@ -60,6 +60,14 @@ ul {
   display: none;
 }
 
+.date-m {
+  margin-top: 20px;
+}
+
+#filter-date {
+  margin-top: 10px;
+}
+
 /* Button styling */
 .button {
   margin-top: 10px;

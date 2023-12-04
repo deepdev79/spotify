@@ -32,6 +32,17 @@
       <div class="file-info"><ul class="file-list"></ul></div>
       <!-- Data time result -->
       <div class="data-result"></div>
+      <!-- Filter data via date -->
+      <div class="date-m hidden">
+        <h3>Filter data by date:</h3>
+        <form id="filter-date">
+          <label for="start">Start date:</label>
+          <input type="date" id="start" name="trip-start" value="2022-01-01" />
+          <label for="start">End date:</label>
+          <input type="date" id="end" name="trip-end" value="2023-01-01" />
+          <button type="submit" class="button">Filter</button>
+        </form>
+      </div>
     </div>
     <!-- ALBUMS -->
     <div class="hidden content" id="Album">

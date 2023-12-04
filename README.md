@@ -2,7 +2,9 @@
 
 ## Note:
 
-This is completely frontend pet project using vanilla Javascript. It might take some time to complete the process once you upload the files.
+This is completely frontend pet project using vanilla Javascript. It might take some time to complete the process once you upload the files please be patient.
+
+Same album name in extended history and same track name in last year history might give out inconsistent result
 
 ## How to use:
 
@@ -33,3 +35,7 @@ This is completely frontend pet project using vanilla Javascript. It might take 
 9. If you only want to see last year streaming history then the files you need to upload should be formated as:
 
    "StreamingHistory[file number]"
+
+10. After uploading data you can also filter the data to see your history within certain timeframes.
+
+11. The "other" tab is experimental and doesn't provide much information hence it's not fully maintained

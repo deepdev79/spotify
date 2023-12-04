@@ -2,7 +2,7 @@ import { albumDisplay, clearAlbumTable } from "./albums";
 import { artistDisplay, clearArtistTable } from "./artist";
 import { clearTrackTable, tracksDisplay } from "./tracks";
 import { clearOtherData, other, other2 } from "./other";
-import { clearMessage, home, noUpload } from "./home";
+import { clearMessage, home, invalidData, noUpload } from "./home";
 import { active } from "./script";
 
 const loader = document.querySelector(".loader");
@@ -14,7 +14,9 @@ let tracks = [];
 let platform, countries;
 let tempPlatform = [];
 let tempCountry = [];
+let shallowCopy = [];
 let flag;
+let shallowCopyCounter = 0;
 let hoursListened = 0;
 
 let dayStart, dayEnd;
@@ -168,15 +170,8 @@ function infoYear() {
 // inp contains array of parsed JSON files
 
 function spotify(inp) {
-  if (data.length > 0) {
-    data = [];
-    artists = [];
-    tracks = [];
-    albums = [];
-    tempCountry = [];
-    tempPlatform = [];
-    hoursListened = 0;
-  }
+  clearAll();
+
   data = inp.flat();
   // console.log(data[0]); //uncomment to see how data is stored
   if (Object.keys(data[0]).length < 5) {
@@ -197,6 +192,26 @@ function spotify(inp) {
     home();
   }
   loader.classList.add("hidden-loader");
+}
+
+function filterData(startDate, endDate) {
+  let filteredArray = [];
+
+  if (shallowCopyCounter === 0) {
+    shallowCopy = data;
+    shallowCopyCounter = 1;
+  }
+
+  filteredArray = shallowCopy.filter(
+    (ele) =>
+      new Date(ele.ts ? ele.ts : ele.endTime).getTime() >=
+        startDate.getTime() &&
+      new Date(ele.ts ? ele.ts : ele.endTime).getTime() <= endDate.getTime()
+  );
+  if (filteredArray.length === 0) {
+    clearMessage();
+    invalidData();
+  } else spotify(filteredArray);
 }
 
 export {
@@ -249,11 +264,9 @@ function handleSubmit(event) {
   }
 
   loader.classList.remove("hidden-loader");
-  clearMessage();
-  clearAlbumTable();
-  clearArtistTable();
-  clearTrackTable();
-  clearOtherData();
+  shallowCopy = [];
+  shallowCopyCounter = 0;
+  filterDisplayToggle.classList.remove("hidden");
   let readers = [];
   for (let i = 0; i < files.length; i++) {
     readers.push(readFileAsText(files[i]));
@@ -279,11 +292,46 @@ function readFileAsText(file) {
   });
 }
 
+//----------------CLEAR DATA---------------------//
+
+function clearAll() {
+  data = [];
+  artists = [];
+  tracks = [];
+  albums = [];
+  tempCountry = [];
+  tempPlatform = [];
+  hoursListened = 0;
+
+  clearMessage();
+  clearAlbumTable();
+  clearArtistTable();
+  clearTrackTable();
+  clearOtherData();
+}
 //-------------EVENT HANDLERS for selecting and uploading files----------//
 
 file.addEventListener("change", filesSelected);
 
 form.addEventListener("submit", handleSubmit);
+
+//--------------------FILTER-DATA--------------------//
+
+let form2 = document.querySelector("#filter-date");
+let filterDisplayToggle = document.querySelector(".date-m");
+
+const startDateElement = document.getElementById("start");
+const endDateElement = document.getElementById("end");
+
+//baad waali date bdi
+function dateSelect(event) {
+  event.preventDefault();
+  let startDate = new Date(startDateElement.value);
+  let endDate = new Date(endDateElement.value);
+  filterData(startDate, endDate);
+}
+
+form2.addEventListener("submit", dateSelect);
 
 //---------------script.js function-----------------//
 active();

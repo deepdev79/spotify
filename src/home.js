@@ -1,8 +1,11 @@
 import { dayEnd, dayStart, hoursListened } from "./spotifyData";
 const ele = document.createElement("p");
 const ele2 = document.createElement("p");
+const ele4 = document.createElement("p");
 const dataInfo = document.querySelector(".data-result");
 let mins, hours, days;
+
+//----------------------HOME DATA----------------------//
 function home() {
   mins = (hoursListened / 60000).toFixed(2);
   hours = (mins / 60).toFixed(2);
@@ -11,8 +14,14 @@ function home() {
   ele.classList.add("data-result");
   dataInfo.appendChild(ele);
   ele2.textContent = `You have listened to music for ${mins} mins or ${hours} hours or ${days} days`;
-  ele.classList.add("data-result");
+  ele2.classList.add("data-result");
   dataInfo.appendChild(ele2);
+}
+
+function invalidData() {
+  ele4.textContent = `Dates selected seem to be out of range in relative to data input`;
+  ele4.classList.add("data-result");
+  dataInfo.appendChild(ele4);
 }
 
 const ele3 = document.createElement("p");
@@ -28,4 +37,4 @@ function clearMessage() {
   }
 }
 
-export { home, noUpload, clearMessage };
+export { home, noUpload, clearMessage, invalidData };
