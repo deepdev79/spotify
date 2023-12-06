@@ -1,4 +1,12 @@
-# Stats for life time listening history in spotify
+# Life time listening history in spotify
+
+## Note:
+
+- The more accurate term for "Times Played" is "Times visited" i.e. The number of times you visited the track/album/artist be it only for 3-5 seconds, as of now I've intentionally left it as it is.
+
+- Different albums having exact same name in extended history might give out inconsistent results same applies to track names in last year history.
+
+- This is completely frontend pet project using vanilla Javascript. It might take some time to complete the process once you upload the files please be patient.
 
 ## How to use:
 
@@ -33,11 +41,3 @@
 10. After uploading data you can also filter the data to see your history within certain timeframes.
 
 11. The "other" tab is experimental and doesn't provide much information hence it's not fully maintained
-
-## Note:
-
-- The more accurate term for "Times Played" is "Times visited" i.e. The number of times you visited the track/album/artist be it only for 3-5 seconds, as of now I've intentionally left it as it is.
-
-- Different albums having exact same name in extended history might give out inconsistent results same applies to track names in last year history.
-
-- This is completely frontend pet project using vanilla Javascript. It might take some time to complete the process once you upload the files please be patient.
