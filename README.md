@@ -2,7 +2,7 @@
 
 ## Note:
 
-- The more accurate term for "Times Played" is "Times visited" i.e. The number of times you visited the track/album/artist be it only for 3-5 seconds, as of now I've intentionally left it as it is.
+- The track and thereby album and artist is only counted if you played it for more than 30 seconds.
 
 - Different albums having exact same name in extended history might give out inconsistent results same applies to track names in last year history.
 

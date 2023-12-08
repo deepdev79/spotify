@@ -47,13 +47,16 @@ function artistsInfo(record) {
   flag = 1;
   let unArtist = new Map();
   artists.forEach((ele) => {
-    if (ele.get("name") === record.master_metadata_album_artist_name) {
+    if (
+      ele.get("name") === record.master_metadata_album_artist_name &&
+      record.ms_played > 30000
+    ) {
       flag = 0;
       ele.set("mins", ele.get("mins") + record.ms_played);
       ele.set("timesPlayed", ele.get("timesPlayed") + 1);
     }
   });
-  if (flag === 1) {
+  if (flag === 1 && record.ms_played > 30000) {
     unArtist.set("name", record.master_metadata_album_artist_name);
     unArtist.set("mins", record.ms_played);
     unArtist.set("timesPlayed", 1);
@@ -67,13 +70,16 @@ function tracksInfo(record) {
   flag = 1;
   let unTrack = new Map();
   tracks.forEach((ele) => {
-    if (ele.get("url") === record.spotify_track_uri) {
+    if (
+      ele.get("url") === record.spotify_track_uri &&
+      record.ms_played > 30000
+    ) {
       flag = 0;
       ele.set("mins", ele.get("mins") + record.ms_played);
       ele.set("timesPlayed", ele.get("timesPlayed") + 1);
     }
   });
-  if (flag === 1) {
+  if (flag === 1 && record.ms_played > 30000) {
     unTrack.set("name", record.master_metadata_track_name);
     unTrack.set("aname", record.master_metadata_album_artist_name);
     unTrack.set("mins", record.ms_played);
@@ -89,13 +95,16 @@ function albumInfo(record) {
   flag = 1;
   let unAlbum = new Map();
   albums.forEach((ele) => {
-    if (ele.get("name") === record.master_metadata_album_album_name) {
+    if (
+      ele.get("name") === record.master_metadata_album_album_name &&
+      record.ms_played > 30000
+    ) {
       flag = 0;
       ele.set("mins", ele.get("mins") + record.ms_played);
       ele.set("timesPlayed", ele.get("timesPlayed") + 1);
     }
   });
-  if (flag === 1) {
+  if (flag === 1 && record.ms_played > 30000) {
     unAlbum.set("name", record.master_metadata_album_album_name);
     unAlbum.set("aname", record.master_metadata_album_artist_name);
     unAlbum.set("mins", record.ms_played);
@@ -123,13 +132,13 @@ function artistsInfoYear(record) {
   flag = 1;
   let unArtist = new Map();
   artists.forEach((ele) => {
-    if (ele.get("name") === record.artistName) {
+    if (ele.get("name") === record.artistName && record.msPlayed > 30000) {
       flag = 0;
       ele.set("mins", ele.get("mins") + record.msPlayed);
       ele.set("timesPlayed", ele.get("timesPlayed") + 1);
     }
   });
-  if (flag === 1) {
+  if (flag === 1 && record.msPlayed > 30000) {
     unArtist.set("name", record.artistName);
     unArtist.set("mins", record.msPlayed);
     unArtist.set("timesPlayed", 1);
@@ -142,13 +151,13 @@ function tracksInfoYear(record) {
   hoursListened += record.msPlayed;
   let unTrack = new Map();
   tracks.forEach((ele) => {
-    if (ele.get("name") === record.trackName) {
+    if (ele.get("name") === record.trackName && record.msPlayed > 30000) {
       flag = 0;
       ele.set("mins", ele.get("mins") + record.msPlayed);
       ele.set("timesPlayed", ele.get("timesPlayed") + 1);
     }
   });
-  if (flag === 1) {
+  if (flag === 1 && record.msPlayed > 30000) {
     unTrack.set("name", record.trackName);
     unTrack.set("aname", record.artistName);
     unTrack.set("mins", record.msPlayed);
